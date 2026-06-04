@@ -8,12 +8,14 @@ export const siteConfig = {
   url: "https://geotech.agency",
   // The maze-G + mint dot mark, used in JSON-LD / social cards.
   logo: "/logo.jpeg",
-  tagline: "We engineer systems that ship.",
+  tagline: "Powering growth through smart technology",
   description:
-    "Geotech Solutions is a digital engineering studio. We build high-performance websites, ship our own software products (Recur Pro, Slotly), and produce motion design that makes them sell.",
+    "Geotech Solutions powers growth through smart technology — a digital engineering studio building high-performance websites, our own software products (Recur Pro, Slotly), and motion design that makes them sell.",
   email: "geotechsolutionsng@gmail.com",
   // WhatsApp in international wa.me format (no +, no leading 0). 0707… → 234707…
   whatsapp: "2347079797963",
+  // Human-readable for display + JSON-LD telephone (E.164-ish).
+  whatsappDisplay: "+234 707 979 7963",
   location: { city: "Lagos", region: "Lagos", country: "NG" },
   founded: "2024",
   social: {
@@ -23,6 +25,15 @@ export const siteConfig = {
     github: "https://github.com/geotech-solutions",
   },
 } as const;
+
+/**
+ * Single source of truth for the WhatsApp deep-link. Pass `text` to pre-fill a
+ * message (it gets URL-encoded). Used by the floating FAB and the contact CTA.
+ */
+export const whatsappLink = (text?: string) =>
+  `https://wa.me/${siteConfig.whatsapp}${
+    text ? `?text=${encodeURIComponent(text)}` : ""
+  }`;
 
 export type NavItem = { label: string; href: string };
 

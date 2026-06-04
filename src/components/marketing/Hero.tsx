@@ -56,13 +56,13 @@ export default function Hero() {
             initial="hidden"
             animate="show"
             variants={rise}
-            className="mt-6 font-display text-[3rem] font-semibold leading-[0.95] tracking-[-0.03em] text-ink sm:text-7xl lg:text-[5.4rem]"
+            className="mt-6 font-display text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.03em] text-ink sm:text-6xl lg:text-[4.7rem] lg:leading-[0.98]"
           >
-            We engineer
+            Powering growth
             <br />
-            systems that{" "}
+            through smart{" "}
             <span className="relative whitespace-nowrap text-mint text-glow">
-              ship
+              technology
               <svg
                 aria-hidden
                 viewBox="0 0 200 18"

@@ -61,30 +61,30 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 96,
-              lineHeight: 1.02,
+              fontSize: 82,
+              lineHeight: 1.06,
               fontWeight: 700,
               color: ink,
               letterSpacing: -2,
             }}
           >
-            We engineer
+            Powering growth
           </div>
           <div
             style={{
               display: "flex",
               alignItems: "flex-end",
-              fontSize: 96,
-              lineHeight: 1.02,
+              fontSize: 82,
+              lineHeight: 1.06,
               fontWeight: 700,
               color: ink,
               letterSpacing: -2,
             }}
           >
-            systems that
-            <span style={{ color: ink, marginLeft: 24, display: "flex", flexDirection: "column" }}>
-              ship.
-              <div style={{ display: "flex", height: 10, backgroundColor: mint, marginTop: -4 }} />
+            through smart
+            <span style={{ color: ink, marginLeft: 22, display: "flex", flexDirection: "column" }}>
+              technology.
+              <div style={{ display: "flex", height: 10, backgroundColor: mint, marginTop: -2 }} />
             </span>
           </div>
         </div>

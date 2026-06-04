@@ -88,6 +88,14 @@ export default function RootLayout({
     image: `${siteConfig.url}${siteConfig.logo}`,
     logo: `${siteConfig.url}${siteConfig.logo}`,
     email: siteConfig.email,
+    telephone: siteConfig.whatsappDisplay,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      telephone: siteConfig.whatsappDisplay,
+      email: siteConfig.email,
+      availableLanguage: ["en"],
+    },
     description: siteConfig.description,
     foundingDate: siteConfig.founded,
     address: {

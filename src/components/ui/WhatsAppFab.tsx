@@ -1,4 +1,4 @@
-import { siteConfig } from "@/lib/site";
+import { siteConfig, whatsappLink } from "@/lib/site";
 
 /**
  * Floating WhatsApp action button — fixed bottom-right on every page.
@@ -6,8 +6,7 @@ import { siteConfig } from "@/lib/site";
  * a pre-filled chat. Pure anchor, so it works without JS.
  */
 export default function WhatsAppFab() {
-  const message = `Hi ${siteConfig.name} — I'd like to discuss a project.`;
-  const href = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
+  const href = whatsappLink(`Hi ${siteConfig.name} — I'd like to discuss a project.`);
 
   return (
     <a
