@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionLabel from "@/components/ui/SectionLabel";
-import LinkLoader from "@/components/ui/LinkLoader";
 import { LogoMark } from "@/components/brand/Logo";
 import { getProduct, products } from "@/lib/products";
 import { siteConfig } from "@/lib/site";
@@ -132,7 +131,6 @@ export default async function ProductPage({
                 >
                   Want one like it?
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-                  <LinkLoader />
                 </Link>
               </div>
             </Reveal>
@@ -213,7 +211,6 @@ export default async function ProductPage({
           >
             Start a project
             <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-            <LinkLoader />
           </Link>
         </div>
       </section>

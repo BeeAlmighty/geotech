@@ -1,82 +1,24 @@
-"use client";
-
-import { motion, type Variants } from "framer-motion";
-import type { ElementType, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: ReactNode;
+  /** Accepted for API compatibility; the CSS reveal is scroll-driven. */
   delay?: number;
   y?: number;
   className?: string;
   as?: "div" | "section" | "li" | "article" | "header";
 };
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
-/** Scroll-triggered reveal. Slides up + fades once, then stays put. */
-export default function Reveal({
-  children,
-  delay = 0,
-  y = 22,
-  className,
-  as = "div",
-}: RevealProps) {
-  const MotionTag = motion[as] as ElementType;
-  return (
-    <MotionTag
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, ease, delay }}
-      className={cn(className)}
-    >
-      {children}
-    </MotionTag>
-  );
-}
-
-/** Stagger container — children animate in sequence as the group enters view. */
-const containerVariants: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
-};
-
-export function Stagger({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
-      className={cn(className)}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export function StaggerItem({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <motion.div variants={itemVariants} className={cn(className)}>
-      {children}
-    </motion.div>
-  );
+/**
+ * Scroll-triggered reveal — slides up + fades once as it enters the viewport.
+ *
+ * Implemented as a pure CSS scroll-driven animation (`animation-timeline: view()`),
+ * so it ships ZERO JavaScript and adds no hydration/main-thread cost. Elements
+ * already in the initial viewport render fully visible; browsers without
+ * scroll-timeline support (or users with reduced-motion) also see content
+ * immediately — the animation is purely additive. See `.reveal` in globals.css.
+ */
+export default function Reveal({ children, className, as: Tag = "div" }: RevealProps) {
+  return <Tag className={cn("reveal", className)}>{children}</Tag>;
 }

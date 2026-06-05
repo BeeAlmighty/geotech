@@ -1,12 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { Play } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionLabel from "@/components/ui/SectionLabel";
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 const reels = [
   { code: "REEL A", title: "The 14-message booking", len: "00:15" },
@@ -14,19 +8,9 @@ const reels = [
   { code: "REEL C", title: "While you sleep", len: "00:12" },
 ];
 
-// The sample reel shown in the frame. Drop the file in /public/motion/ as
-// reel.mp4 (and an optional still as reel-poster.jpg). If it's missing, the
-// frame falls back to the animated placeholder below — no broken player.
-const REEL = { src: "/motion/reel.mp4", poster: "/motion/reel-poster.jpg" };
+const bars = [0, 1, 2, 3, 4, 5, 6];
 
 export default function MotionShowcase() {
-  const reduce = useReducedMotion();
-  const bars = [0, 1, 2, 3, 4, 5, 6];
-  // The video fades in over the animated placeholder only once it can actually
-  // play. If the file is missing it never fires onCanPlay, so the placeholder
-  // simply stays — no broken player, and no reliance on a pre-hydration error.
-  const [videoReady, setVideoReady] = useState(false);
-
   return (
     <section
       id="motion"
@@ -62,12 +46,11 @@ export default function MotionShowcase() {
           </ul>
         </Reveal>
 
-        {/* Reel frame — plays the real sample over an animated placeholder */}
+        {/* Reel frame — an animated 9:16 instrument placeholder */}
         <Reveal delay={0.1} className="w-full">
           <div className="plate relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden">
             <span className="tick absolute left-0 top-0 z-30" />
 
-            {/* base layer: animated placeholder (shows until the video can play) */}
             <div className="flex items-center justify-between p-6">
               <span className="data-label">REEL · 9:16</span>
               <span className="data-label flex items-center gap-1.5">
@@ -79,20 +62,10 @@ export default function MotionShowcase() {
             {/* waveform / motion bars */}
             <div className="absolute inset-x-6 top-1/2 flex h-28 -translate-y-1/2 items-end justify-center gap-2">
               {bars.map((b) => (
-                <motion.span
+                <span
                   key={b}
-                  className="w-3 rounded-brand bg-mint shadow-[0_0_12px_-2px_rgba(56,240,178,0.7)]"
-                  initial={{ height: "28%" }}
-                  animate={
-                    reduce
-                      ? { height: "55%" }
-                      : { height: ["28%", "92%", "44%", "70%", "30%"] }
-                  }
-                  transition={
-                    reduce
-                      ? undefined
-                      : { duration: 2.4, ease, repeat: Infinity, delay: b * 0.12 }
-                  }
+                  className="wave-bar w-3 rounded-brand bg-mint shadow-[0_0_12px_-2px_rgba(56,240,178,0.7)]"
+                  style={{ "--bar-delay": `${b * 0.12}s` } as React.CSSProperties}
                 />
               ))}
             </div>
@@ -105,44 +78,13 @@ export default function MotionShowcase() {
             {/* sweeping playhead timeline */}
             <div className="absolute bottom-6 left-6 right-6">
               <div className="relative h-px bg-line-strong">
-                <motion.span
-                  className="absolute -top-[3px] h-1.5 w-1.5 rounded-full bg-mint-bright"
-                  initial={{ left: "0%" }}
-                  animate={reduce ? { left: "62%" } : { left: ["0%", "100%"] }}
-                  transition={
-                    reduce ? undefined : { duration: 4, ease: "linear", repeat: Infinity }
-                  }
-                />
+                <span className="playhead absolute -top-[3px] h-1.5 w-1.5 rounded-full bg-mint-bright" />
               </div>
               <div className="mt-2 flex justify-between font-mono text-[0.62rem] uppercase tracking-wider text-muted">
                 <span>00:00</span>
                 <span>FRAME 048</span>
               </div>
             </div>
-
-            {/* the real sample reel — fades in over the placeholder once playable */}
-            <video
-              className={`absolute inset-0 z-10 h-full w-full bg-paper object-cover transition-opacity duration-500 ${
-                videoReady ? "opacity-100" : "pointer-events-none opacity-0"
-              }`}
-              src={REEL.src}
-              poster={REEL.poster}
-              controls={videoReady}
-              playsInline
-              preload="metadata"
-              aria-label="Geotech Solutions motion design sample reel"
-              onCanPlay={() => setVideoReady(true)}
-              onError={() => setVideoReady(false)}
-            />
-            {videoReady && (
-              <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between bg-gradient-to-b from-ink/55 to-transparent p-6">
-                <span className="data-label text-paper/90">REEL · 9:16</span>
-                <span className="data-label flex items-center gap-1.5 text-paper/90">
-                  <span className="h-1.5 w-1.5 rounded-full bg-mint-bright" />
-                  SAMPLE
-                </span>
-              </div>
-            )}
           </div>
         </Reveal>
       </div>

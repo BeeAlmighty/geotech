@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { LogoMarkImage } from "@/components/brand/Logo";
-import LinkLoader from "@/components/ui/LinkLoader";
 import { siteConfig } from "@/lib/site";
 
 const columns = [
@@ -68,7 +67,6 @@ export default function Footer() {
                       className="inline-flex items-center gap-1.5 text-sm text-graphite transition-colors hover:text-mint active:text-mint"
                     >
                       {link.label}
-                      <LinkLoader />
                     </Link>
                   </li>
                 ))}

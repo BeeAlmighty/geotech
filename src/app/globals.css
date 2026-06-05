@@ -276,6 +276,126 @@
   }
 }
 
+/* ───────────────────────────────────────────────────────────────────────────
+   Entrance / scroll-reveal — pure CSS (replaces framer-motion).
+   The LCP hero heading is deliberately NOT opacity-gated so it paints at FCP.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Scroll-triggered reveal — pure CSS scroll-driven animation (no JS, no
+   hydration). Default state is VISIBLE so browsers without scroll-timeline
+   support, and reduced-motion users, always see content. Where supported, the
+   element fades+slides up as it enters the viewport; transform+opacity only, so
+   it never causes layout shift (CLS). Elements already in the first viewport
+   resolve to their end (visible) state immediately — safe for any LCP text. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in 0.7s var(--ease-survey) both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 45%;
+    }
+  }
+}
+
+/* Above-the-fold hero entrance: runs from first paint (no JS, no hydration wait). */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-rise {
+  animation: rise 0.7s var(--ease-survey) both;
+  animation-delay: var(--rise-delay, 0s);
+}
+
+/* Hero instrument panel (desktop only) entrance */
+@keyframes plate-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.plate-in {
+  animation: plate-in 1s var(--ease-survey) 0.35s both;
+}
+
+/* Radar sweep — continuous rotation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.radar-spin {
+  animation: spin 7s linear infinite;
+}
+
+/* Motion-showcase waveform bars */
+@keyframes wave {
+  0%,
+  100% {
+    height: 28%;
+  }
+  25% {
+    height: 92%;
+  }
+  50% {
+    height: 44%;
+  }
+  75% {
+    height: 70%;
+  }
+}
+.wave-bar {
+  height: 28%;
+  animation: wave 2.4s var(--ease-survey) infinite;
+  animation-delay: var(--bar-delay, 0s);
+}
+
+/* Motion-showcase sweeping playhead */
+@keyframes playhead {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
+}
+.playhead {
+  animation: playhead 4s linear infinite;
+}
+
+/* Mobile nav: animate height via grid-rows 0fr→1fr (no JS measurement) */
+.menu-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease-survey);
+}
+.menu-collapse[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.menu-collapse > div {
+  overflow: hidden;
+}
+
 /* The mint dot pulse — the heartbeat of the page */
 @keyframes signal {
   0%,
@@ -293,34 +413,6 @@
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
-  }
-}
-
-/* ---- Navigation pending hint (useLinkStatus) ---- */
-.link-hint {
-  display: inline-block;
-  width: 0.5em;
-  height: 0.5em;
-  flex: none;
-  border-radius: 9999px;
-  background: var(--color-mint-bright);
-  opacity: 0;
-  visibility: hidden;
-}
-.link-hint.is-pending {
-  visibility: visible;
-  animation:
-    hint-in 200ms ease 100ms forwards,
-    hint-pulse 1s ease-in-out 100ms infinite;
-}
-@keyframes hint-in {
-  to {
-    opacity: 1;
-  }
-}
-@keyframes hint-pulse {
-  50% {
-    opacity: 0.2;
   }
 }
 

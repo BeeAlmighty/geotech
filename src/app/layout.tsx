@@ -6,22 +6,30 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import WhatsAppFab from "@/components/ui/WhatsAppFab";
 
+// Fonts: display "optional" never swaps after first paint, so it can't cause a
+// layout shift. The two TEXT fonts (display heading + body) are preloaded so
+// they're ready before the first paint — the heading then renders in its real
+// font from the start (no reflow of the balance-wrapped headline, which was the
+// source of the large intermittent CLS). Space Mono is only used for tiny
+// telemetry labels, so it stays off the critical path (preload:false) to save
+// bandwidth; its metric-matched fallback makes any late application shift-free.
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
   variable: "--font-bricolage",
 });
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
   variable: "--font-hanken",
 });
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
-  display: "swap",
+  display: "optional",
+  preload: false,
   variable: "--font-space-mono",
 });
 

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionLabel from "@/components/ui/SectionLabel";
-import LinkLoader from "@/components/ui/LinkLoader";
 import { products } from "@/lib/products";
 
 export default function Products() {
@@ -61,7 +60,6 @@ export default function Products() {
                       size={15}
                       className="transition-transform duration-300 group-hover:translate-x-1"
                     />
-                    <LinkLoader />
                   </Link>
                   {product.liveUrl && (
                     <a

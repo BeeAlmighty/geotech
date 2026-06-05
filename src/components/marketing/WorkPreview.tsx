@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionLabel from "@/components/ui/SectionLabel";
-import LinkLoader from "@/components/ui/LinkLoader";
 import WorkGrid from "@/components/marketing/WorkGrid";
 import { previewProjects } from "@/lib/projects";
 
@@ -30,7 +29,6 @@ export default function WorkPreview() {
           >
             <span className="underline-draw pb-0.5">View all work</span>
             <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-            <LinkLoader />
           </Link>
         </Reveal>
 

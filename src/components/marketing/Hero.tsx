@@ -1,26 +1,10 @@
-"use client";
-
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
 import { LogoMark } from "@/components/brand/Logo";
-import LinkLoader from "@/components/ui/LinkLoader";
-
-const ease = [0.22, 1, 0.36, 1] as const;
-const rise = {
-  hidden: { opacity: 0, y: 26 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease, delay: 0.1 + i * 0.1 },
-  }),
-};
 
 const services = ["Website creation", "Digital products", "Motion design"];
 
 export default function Hero() {
-  const reduce = useReducedMotion();
-
   return (
     <section
       aria-labelledby="hero-heading"
@@ -33,12 +17,9 @@ export default function Hero() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 pb-20 pt-32 md:px-8 md:pb-28 md:pt-40 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         {/* Left — the statement */}
         <div>
-          <motion.p
-            custom={0}
-            initial="hidden"
-            animate="show"
-            variants={rise}
-            className="data-label flex flex-col gap-y-1.5 text-graphite sm:flex-row sm:items-center sm:gap-x-3"
+          <p
+            className="hero-rise data-label flex flex-col gap-y-1.5 text-graphite sm:flex-row sm:items-center sm:gap-x-3"
+            style={{ "--rise-delay": "0.05s" } as React.CSSProperties}
           >
             <span className="flex items-center gap-2.5">
               <span className="h-1.5 w-1.5 rounded-full bg-mint-bright dot-glow" />
@@ -48,14 +29,11 @@ export default function Hero() {
               <span className="hidden text-line-strong sm:inline">·</span>
               Lagos → Worldwide
             </span>
-          </motion.p>
+          </p>
 
-          <motion.h1
+          {/* LCP element — rendered solid from first paint (no opacity gate). */}
+          <h1
             id="hero-heading"
-            custom={1}
-            initial="hidden"
-            animate="show"
-            variants={rise}
             className="mt-6 font-display text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.03em] text-ink sm:text-6xl lg:text-[4.7rem] lg:leading-[0.98]"
           >
             Powering growth
@@ -69,44 +47,37 @@ export default function Hero() {
                 preserveAspectRatio="none"
                 className="absolute -bottom-2 left-0 h-3 w-full text-mint-bright"
               >
-                <motion.path
+                <path
                   d="M2 13 C 52 4, 150 4, 198 11"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth={5}
                   strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.9, ease, delay: 0.9 }}
+                  style={{
+                    strokeDasharray: 200,
+                    strokeDashoffset: 200,
+                    animation: "draw 0.9s var(--ease-survey) 0.6s forwards",
+                  }}
                 />
               </svg>
             </span>
             <span className="text-mint">.</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            custom={2}
-            initial="hidden"
-            animate="show"
-            variants={rise}
-            className="mt-8 max-w-xl text-lg leading-relaxed text-slate"
+          <p
+            className="hero-rise mt-8 max-w-xl text-lg leading-relaxed text-slate"
+            style={{ "--rise-delay": "0.15s" } as React.CSSProperties}
           >
             We build fast, search-ready websites, ship our own software
             products, and produce the motion design that makes them sell — all
             under one roof, built like infrastructure.
-          </motion.p>
+          </p>
 
-          <motion.div
-            custom={3}
-            initial="hidden"
-            animate="show"
-            variants={rise}
-            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+          <div
+            className="hero-rise mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+            style={{ "--rise-delay": "0.25s" } as React.CSSProperties}
           >
-            <Link
-              href="/#contact"
-              className="btn btn-primary group px-7 py-4"
-            >
+            <Link href="/#contact" className="btn btn-primary group px-7 py-4">
               Start a project
               <ArrowDownRight
                 size={15}
@@ -115,16 +86,12 @@ export default function Hero() {
             </Link>
             <Link href="/work" className="btn btn-ghost group px-7 py-4">
               See the work
-              <LinkLoader />
             </Link>
-          </motion.div>
+          </div>
 
-          <motion.ul
-            custom={4}
-            initial="hidden"
-            animate="show"
-            variants={rise}
-            className="mt-12 flex flex-wrap gap-x-6 gap-y-2"
+          <ul
+            className="hero-rise mt-12 flex flex-wrap gap-x-6 gap-y-2"
+            style={{ "--rise-delay": "0.35s" } as React.CSSProperties}
           >
             {services.map((s, i) => (
               <li
@@ -135,16 +102,11 @@ export default function Hero() {
                 {s}
               </li>
             ))}
-          </motion.ul>
+          </ul>
         </div>
 
-        {/* Right — the live signal instrument */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease, delay: 0.35 }}
-          className="plate relative hidden aspect-square w-full max-w-md justify-self-end overflow-hidden p-7 lg:flex"
-        >
+        {/* Right — the live signal instrument (desktop only) */}
+        <div className="plate-in plate relative hidden aspect-square w-full max-w-md justify-self-end overflow-hidden p-7 lg:flex">
           <span className="tick absolute left-0 top-0" />
           <span className="data-label absolute left-6 top-5 z-20">
             SIGNAL · LIVE
@@ -173,15 +135,9 @@ export default function Hero() {
           </div>
 
           {/* rotating radar sweep */}
-          <motion.div
+          <div
             aria-hidden
-            className="absolute inset-0 grid place-items-center"
-            animate={reduce ? undefined : { rotate: 360 }}
-            transition={
-              reduce
-                ? undefined
-                : { duration: 7, ease: "linear", repeat: Infinity }
-            }
+            className="radar-spin absolute inset-0 grid place-items-center"
           >
             <div
               className="h-[88%] w-[88%] rounded-full"
@@ -194,7 +150,7 @@ export default function Hero() {
                   "radial-gradient(circle at center, #000 0 50%, transparent 50%)",
               }}
             />
-          </motion.div>
+          </div>
 
           {/* the mark at the core, glowing */}
           <div className="relative z-10 m-auto flex flex-col items-center justify-center text-mint">
@@ -209,7 +165,7 @@ export default function Hero() {
             <span className="text-mint">STATUS · NOMINAL</span>
             <span>LON 3.39° E</span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

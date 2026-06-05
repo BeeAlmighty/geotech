@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionLabel from "@/components/ui/SectionLabel";
-import LinkLoader from "@/components/ui/LinkLoader";
 import WorkGrid from "@/components/marketing/WorkGrid";
 import { projects } from "@/lib/projects";
 import { siteConfig } from "@/lib/site";
@@ -73,7 +72,6 @@ export default function WorkPage() {
           >
             Start a project
             <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-            <LinkLoader />
           </Link>
         </Reveal>
       </div>
