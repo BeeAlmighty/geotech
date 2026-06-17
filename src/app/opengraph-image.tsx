@@ -51,7 +51,7 @@ export default function OpengraphImage() {
               <circle cx="49" cy="50" r="9" fill={ink} />
               <circle cx="49" cy="50" r="5.5" fill={mint} />
             </svg>
-            Geotech Solutions
+            Geotech Digital Horizon Limited
           </div>
           <div>Lat 6.45° N</div>
         </div>
@@ -100,13 +100,13 @@ export default function OpengraphImage() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ color: mint }}>01</span> Website creation
+            <span style={{ color: mint }}>01</span> Software
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ color: mint }}>02</span> Digital products
+            <span style={{ color: mint }}>02</span> Automation
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ color: mint }}>03</span> Motion design
+            <span style={{ color: mint }}>03</span> White-label SaaS
           </div>
         </div>
       </div>

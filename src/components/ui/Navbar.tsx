@@ -28,7 +28,7 @@ export default function Navbar() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 md:px-8">
-        <Link href="/" aria-label="Geotech Solutions — home" className="group">
+        <Link href="/" aria-label="Geotech Digital Horizon Limited — home" className="group">
           <Logo size={34} />
         </Link>
 

@@ -60,7 +60,7 @@ export const products: Product[] = [
     spec: [
       { label: "Type", value: "B2B SaaS" },
       { label: "Channel", value: "WhatsApp" },
-      { label: "Built by", value: "Geotech Solutions" },
+      { label: "Built by", value: "Geotech Digital Horizon Limited" },
       { label: "Status", value: "Live · production" },
     ],
   },
@@ -99,7 +99,7 @@ export const products: Product[] = [
     spec: [
       { label: "Type", value: "White-label SaaS" },
       { label: "Tenancy", value: "Multi-tenant" },
-      { label: "Built by", value: "Geotech Solutions" },
+      { label: "Built by", value: "Geotech Digital Horizon Limited" },
       { label: "Status", value: "Live · multi-tenant demo" },
     ],
   },

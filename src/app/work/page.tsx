@@ -10,14 +10,14 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Work — websites, products & motion we've shipped",
   description:
-    "Selected projects from Geotech Solutions: websites, digital products and motion design built for real clients across finance, healthcare, hospitality and Web3.",
+    "Selected projects from Geotech Digital Horizon Limited: websites, apps, automation, SaaS and motion design built for real clients across finance, healthcare, hospitality and Web3.",
   alternates: { canonical: "/work" },
   openGraph: {
     type: "website",
     url: `${siteConfig.url}/work`,
     title: `Work · ${siteConfig.name}`,
     description:
-      "Selected websites, products and motion design built by Geotech Solutions.",
+      "Selected websites, apps, automation and motion design built by Geotech Digital Horizon Limited.",
   },
 };
 
@@ -25,7 +25,7 @@ export default function WorkPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Work — Geotech Solutions",
+    name: "Work — Geotech Digital Horizon Limited",
     url: `${siteConfig.url}/work`,
     isPartOf: { "@type": "WebSite", name: siteConfig.name, url: siteConfig.url },
     hasPart: projects.map((p) => ({

@@ -23,7 +23,7 @@ export function LogoMarkImage({ size = 40, className }: LogoMarkImageProps) {
     >
       <Image
         src="/logo.jpeg"
-        alt="Geotech Solutions"
+        alt="Geotech Digital Horizon Limited"
         width={size * 2}
         height={size * 2}
         priority
@@ -52,7 +52,7 @@ export function LogoMark({
   size = 40,
   animated = false,
   className,
-  title = "Geotech Solutions",
+  title = "Geotech Digital Horizon Limited",
 }: LogoMarkProps) {
   const drawStyle = animated
     ? ({
@@ -125,8 +125,8 @@ export default function Logo({
           <span className="font-display text-lg font-semibold tracking-tight text-ink">
             Geotech
           </span>
-          <span className="data-label mt-0.5 !text-[0.5rem] !tracking-[0.32em] text-muted">
-            Solutions
+          <span className="data-label mt-0.5 !text-[0.5rem] !tracking-[0.18em] text-muted">
+            Digital Horizon
           </span>
         </span>
       )}

@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { getProduct, products } from "@/lib/products";
 import { siteConfig } from "@/lib/site";
 
-export const alt = "Geotech Solutions product";
+export const alt = "Geotech Digital Horizon Limited product";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -64,7 +64,7 @@ export default async function ProductOg({
               <circle cx="49" cy="50" r="9" fill={ink} />
               <circle cx="49" cy="50" r="5.5" fill={mint} />
             </svg>
-            Geotech Solutions
+            Geotech Digital Horizon Limited
           </div>
           <div>{category}</div>
         </div>
@@ -88,7 +88,7 @@ export default async function ProductOg({
 
         <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 24, color: graphite }}>
           <div style={{ width: 12, height: 12, borderRadius: 12, backgroundColor: mint }} />
-          A product built &amp; run by Geotech Solutions
+          A product built &amp; run by Geotech Digital Horizon Limited
         </div>
       </div>
     ),

@@ -2,7 +2,13 @@ import Link from "next/link";
 import { ArrowDownRight } from "lucide-react";
 import { LogoMark } from "@/components/brand/Logo";
 
-const services = ["Website creation", "Digital products", "Motion design"];
+const services = [
+  "Software",
+  "Automation",
+  "White-label SaaS",
+  "Motion & video",
+  "Consulting",
+];
 
 export default function Hero() {
   return (
@@ -68,9 +74,9 @@ export default function Hero() {
             className="hero-rise mt-8 max-w-xl text-lg leading-relaxed text-slate"
             style={{ "--rise-delay": "0.15s" } as React.CSSProperties}
           >
-            We build fast, search-ready websites, ship our own software
-            products, and produce the motion design that makes them sell — all
-            under one roof, built like infrastructure.
+            We build software and automation that pays for itself — fast
+            websites and apps, n8n + AI workflows, custom and white-label SaaS,
+            and the motion design that sells it. B2B and retention-first.
           </p>
 
           <div

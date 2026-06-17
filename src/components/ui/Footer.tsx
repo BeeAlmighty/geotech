@@ -37,12 +37,12 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           {/* Brand + pitch */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" aria-label="Geotech Solutions — home" className="text-slate">
+            <Link href="/" aria-label="Geotech Digital Horizon Limited — home" className="text-slate">
               <LogoMarkImage size={44} />
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-graphite">
-              A digital engineering studio. We build websites, ship our own
-              software, and animate the work that sells it.
+              We build software and automation that pays for itself — saving your
+              team time and bringing customers back. B2B and retention-first.
             </p>
             <a
               href={`mailto:${siteConfig.email}`}

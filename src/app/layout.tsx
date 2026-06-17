@@ -6,29 +6,33 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import WhatsAppFab from "@/components/ui/WhatsAppFab";
 
-// Fonts: display "optional" never swaps after first paint, so it can't cause a
-// layout shift. The two TEXT fonts (display heading + body) are preloaded so
-// they're ready before the first paint — the heading then renders in its real
-// font from the start (no reflow of the balance-wrapped headline, which was the
-// source of the large intermittent CLS). Space Mono is only used for tiny
-// telemetry labels, so it stays off the critical path (preload:false) to save
-// bandwidth; its metric-matched fallback makes any late application shift-free.
+// Fonts: self-hosted by next/font (no external requests). We use `display: "swap"`
+// with next/font's automatic metric-matched fallback (`adjustFontFallback`, on by
+// default) — the fallback face is size-adjusted to each real font's metrics, so the
+// brand typefaces ALWAYS paint (a beat after first paint) while the swap stays
+// effectively shift-free. This deliberately replaces the old `display: "optional"`,
+// which on slower/cold-cache connections silently kept the generic fallback for the
+// whole visit — i.e. most first-time mobile visitors never actually saw Bricolage /
+// Hanken. The two TEXT fonts are preloaded so they arrive on the critical path; the
+// hero <h1> uses hard <br> breaks (not auto-wrap), so a swap can't reflow its line
+// count. Space Mono drives small telemetry labels + buttons and stays off the
+// preload path (preload:false) to save bandwidth, swapping in cleanly once loaded.
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  display: "optional",
+  display: "swap",
   variable: "--font-bricolage",
 });
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  display: "optional",
+  display: "swap",
   variable: "--font-hanken",
 });
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
-  display: "optional",
+  display: "swap",
   preload: false,
   variable: "--font-space-mono",
 });
@@ -53,11 +57,13 @@ export const metadata: Metadata = {
   keywords: [
     "web design Lagos",
     "Next.js development agency",
-    "website creation Nigeria",
-    "SaaS product studio",
+    "business automation",
+    "n8n workflow automation",
+    "AI workflow automation",
+    "custom & white-label SaaS",
+    "SaaS explainer videos",
     "motion design agency",
-    "Geotech Solutions",
-    "booking system",
+    "Geotech Digital Horizon Limited",
     "customer retention software",
   ],
   alternates: {
@@ -114,16 +120,20 @@ export default function RootLayout({
     },
     areaServed: "Worldwide",
     knowsAbout: [
-      "Web development",
-      "Next.js",
-      "SaaS product engineering",
-      "Motion design",
-      "Search engine optimisation",
+      "Software development",
+      "Web and mobile apps",
+      "Business automation",
+      "n8n and AI workflows",
+      "Custom and white-label SaaS",
+      "Motion design and explainer videos",
+      "Business consulting",
     ],
     makesOffer: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Website creation" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital products" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Motion design" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Software development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Automation (n8n & AI workflows)" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Custom & white-label SaaS" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Motion design & SaaS explainer videos" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Business consultations" } },
     ],
     sameAs: Object.values(siteConfig.social),
   };

@@ -8,8 +8,10 @@
    =========================================================================== */
 
 @theme {
-  /* Type — distinctive, never Inter/Arial. */
-  --font-display: var(--font-bricolage), "Georgia", serif;
+  /* Type — distinctive, never Inter/Arial. Fallbacks are sans (Bricolage is a
+     grotesque, not a serif) so the brief pre-swap flash stays on-brand; next/font
+     also injects a metric-matched fallback ahead of these for a shift-free swap. */
+  --font-display: var(--font-bricolage), ui-sans-serif, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-space-mono), ui-monospace, "SFMono-Regular", monospace;
 
@@ -63,6 +65,26 @@
     /* Mobile-first guard: nothing may force a horizontal scroll. `clip` (not
        `hidden`) keeps position: sticky working and adds no scroll container. */
     overflow-x: clip;
+    /* Slim, on-theme scrollbar (Firefox) so even the chrome reads as instrument. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+
+  /* Webkit/Blink scrollbar — a hairline rail with a mint thumb on hover. */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-line-strong);
+    border-radius: 999px;
+    border: 3px solid var(--color-paper);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-mint);
   }
 
   body {
@@ -74,6 +96,8 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Kerning + common ligatures for a more typeset feel (no perf cost). */
+    font-feature-settings: "kern", "liga", "clig", "calt";
     /* Engineering grid: a faint blueprint plotted on dark glass. Fades toward
        the centre so type stays legible. */
     background-image:
@@ -97,6 +121,8 @@
     font-weight: 600;
     letter-spacing: -0.025em;
     text-wrap: balance;
+    /* Bricolage carries an optical-size axis — let large display cuts use it. */
+    font-optical-sizing: auto;
   }
 
   /* Focus visibility for keyboard users (a11y → SEO signal) */
@@ -146,6 +172,8 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-muted);
+    /* Lined-up digits — survey indices + telemetry read like an instrument. */
+    font-variant-numeric: tabular-nums;
   }
 
   /* A glassy drafting panel — the recurring container of the system */
