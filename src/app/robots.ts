@@ -7,7 +7,9 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${siteConfig.url}/sitemap.xml`,
+    // Both zones' sitemaps are advertised from the host-root robots.txt — the
+    // only place crawlers read it. The second is served by the blog zone.
+    sitemap: [`${siteConfig.url}/sitemap.xml`, `${siteConfig.url}/blog/sitemap.xml`],
     host: siteConfig.url,
   };
 }
