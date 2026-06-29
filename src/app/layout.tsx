@@ -38,7 +38,10 @@ const spaceMono = Space_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#080b0e",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f3f0fc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0816" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -138,12 +141,19 @@ export default function RootLayout({
     sameAs: Object.values(siteConfig.social),
   };
 
+  // Applies the saved/OS theme before first paint — no dark-mode flash. Mirrors
+  // the blog's script and the same `theme` localStorage key.
+  const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+
   return (
     <html
       lang="en"
       className={`${bricolage.variable} ${hanken.variable} ${spaceMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       {/* suppressHydrationWarning: browser extensions (Grammarly, dark-mode, etc.)
           inject attributes onto <body> before React hydrates; this stops that
           benign, client-only mutation from surfacing as a hydration warning. */}

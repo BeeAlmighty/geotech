@@ -3,7 +3,9 @@ import { ArrowUpRight } from "lucide-react";
 import { LogoMarkImage } from "@/components/brand/Logo";
 import { siteConfig } from "@/lib/site";
 
-const columns = [
+type FooterLink = { label: string; href: string; external?: boolean };
+
+const columns: { heading: string; links: FooterLink[] }[] = [
   {
     heading: "Studio",
     links: [
@@ -15,8 +17,20 @@ const columns = [
   {
     heading: "Products",
     links: [
+      { label: "Egora", href: "/products/egora" },
       { label: "Recur Pro", href: "/products/recur-pro" },
       { label: "Slotly", href: "/products/slotly" },
+    ],
+  },
+  {
+    // Cross-zone links to the blog (geotech.agency/blog) — internal-link equity
+    // from every page into the content hubs that target our keywords.
+    heading: "Writing",
+    links: [
+      { label: "Blog", href: "/blog", external: true },
+      { label: "Egora guides", href: "/blog/egora", external: true },
+      { label: "Slotly guides", href: "/blog/slotly", external: true },
+      { label: "Recur-Pro guides", href: "/blog/recur-pro", external: true },
     ],
   },
   {
@@ -34,7 +48,7 @@ export default function Footer() {
   return (
     <footer className="relative mt-auto border-t border-line-strong bg-paper-raised">
       <div className="mx-auto max-w-7xl px-5 py-14 md:px-8">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-[1.4fr_repeat(4,1fr)]">
           {/* Brand + pitch */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" aria-label="Geotech Digital Horizon Limited — home" className="text-slate">
@@ -62,12 +76,21 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="inline-flex items-center gap-1.5 text-sm text-graphite transition-colors hover:text-mint active:text-mint"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        className="inline-flex items-center gap-1.5 text-sm text-graphite transition-colors hover:text-mint active:text-mint"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="inline-flex items-center gap-1.5 text-sm text-graphite transition-colors hover:text-mint active:text-mint"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

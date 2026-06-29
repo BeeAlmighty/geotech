@@ -35,11 +35,18 @@ export const whatsappLink = (text?: string) =>
     text ? `?text=${encodeURIComponent(text)}` : ""
   }`;
 
-export type NavItem = { label: string; href: string };
+export type NavItem = {
+  label: string;
+  href: string;
+  /** Cross-zone link (e.g. the blog multi-zone) — must render as <a>, not <Link>. */
+  external?: boolean;
+};
 
 export const primaryNav: NavItem[] = [
   { label: "Services", href: "/#services" },
   { label: "Work", href: "/work" },
   { label: "Products", href: "/#products" },
+  // The blog is a separate Next zone served at geotech.agency/blog — link with <a>.
+  { label: "Blog", href: "/blog", external: true },
   { label: "Contact", href: "/#contact" },
 ];

@@ -33,7 +33,7 @@ const services: Service[] = [
     index: "03",
     title: "Custom & white-label SaaS",
     icon: Boxes,
-    body: "Branded software for your business or niche — to run yourself or resell. We design, build and operate it the way we run our own: Recur Pro and Slotly are ours, both live.",
+    body: "Branded software for your business or niche — to run yourself or resell. We design, build and operate it the way we run our own: Egora, Recur Pro and Slotly are ours, all live.",
     deliverables: ["MVPs", "SaaS platforms", "White-label", "Dashboards"],
     href: "/#products",
   },

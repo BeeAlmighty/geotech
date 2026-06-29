@@ -133,6 +133,21 @@ export default async function ProductPage({
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
+
+              {product.blogCategory && (
+                // Cross-zone backlink into the matching blog hub — builds the
+                // topic cluster (product page ⇄ guides) for SEO/AEO/GEO.
+                <a
+                  href={`/blog/${product.blogCategory}`}
+                  className="group mt-5 inline-flex items-center gap-1.5 text-sm text-graphite transition-colors hover:text-mint"
+                >
+                  Read the {product.name} playbooks on the blog
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </a>
+              )}
             </Reveal>
 
             {/* Spec sheet */}

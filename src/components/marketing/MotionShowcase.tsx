@@ -64,7 +64,7 @@ export default function MotionShowcase() {
               {bars.map((b) => (
                 <span
                   key={b}
-                  className="wave-bar w-3 rounded-brand bg-mint shadow-[0_0_12px_-2px_rgba(56,240,178,0.7)]"
+                  className="wave-bar w-3 rounded-brand bg-mint shadow-[0_0_12px_-2px_rgba(var(--glow-rgb),0.7)]"
                   style={{ "--bar-delay": `${b * 0.12}s` } as React.CSSProperties}
                 />
               ))}

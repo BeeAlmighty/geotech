@@ -149,7 +149,7 @@ export default function Hero() {
               className="h-[88%] w-[88%] rounded-full"
               style={{
                 background:
-                  "conic-gradient(from 0deg, transparent 0deg, transparent 300deg, rgba(56,240,178,0.04) 330deg, rgba(56,240,178,0.32) 360deg)",
+                  "conic-gradient(from 0deg, transparent 0deg, transparent 300deg, rgba(var(--glow-rgb),0.04) 330deg, rgba(var(--glow-rgb),0.32) 360deg)",
                 maskImage:
                   "radial-gradient(circle at center, #000 0 50%, transparent 50%)",
                 WebkitMaskImage:

@@ -10,11 +10,11 @@ export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-const paper = "#080b0e";
-const ink = "#f3f6f2";
-const slate = "#c9d1cb";
-const graphite = "#99a39c";
-const mint = "#38f0b2";
+const paper = "#0b0816";
+const ink = "#f0ecfb";
+const slate = "#c2b9d6";
+const graphite = "#9389ad";
+const mint = "#a78bfa";
 
 export default async function ProductOg({
   params,
@@ -38,7 +38,7 @@ export default async function ProductOg({
           justifyContent: "space-between",
           backgroundColor: paper,
           backgroundImage:
-            "radial-gradient(55% 55% at 88% 0%, rgba(56,240,178,0.18) 0%, transparent 60%), linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            "radial-gradient(55% 55% at 88% 0%, rgba(167,139,250,0.2) 0%, transparent 60%), linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
           backgroundSize: "100% 100%, 64px 64px, 64px 64px",
           padding: 72,
           fontFamily: "sans-serif",

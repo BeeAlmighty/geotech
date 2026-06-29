@@ -1,58 +1,110 @@
 @import "tailwindcss";
 
 /* ===========================================================================
-   GEOTECH SOLUTIONS — "Engineering studio, after dark"
-   A deep ink canvas, a precise blueprint grid, glassy instrument panels and a
-   single electric-mint signal that actually glows. Bricolage display ·
-   Hanken text · Space Mono telemetry.
+   GEOTECH SOLUTIONS — "Engineering studio", now dual-theme.
+   Colour-synced with the Geotech Blog: a soft-lavender light surface and a
+   violet-tinted midnight dark surface, sharing one violet signal. Every colour
+   is a runtime CSS variable mapped into Tailwind via `@theme inline`, so the
+   existing token names (paper / ink / mint / line …) all keep working while the
+   palette flips on [data-theme]. Bricolage display · Hanken text · Space Mono.
    =========================================================================== */
 
-@theme {
-  /* Type — distinctive, never Inter/Arial. Fallbacks are sans (Bricolage is a
-     grotesque, not a serif) so the brief pre-swap flash stays on-brand; next/font
-     also injects a metric-matched fallback ahead of these for a shift-free swap. */
+/* ── Light palette (default) — soft lavender, violet signal ──────────────── */
+:root {
+  --paper: #f3f0fc; /* soft light-purple canvas */
+  --paper-raised: #ffffff; /* cards / raised panels */
+  --panel: #f7f4fe; /* glassy panel step */
+
+  --ink: #1c1330; /* headings, deep plum */
+  --slate: #463c5e; /* default body text */
+  --graphite: #6a5f85; /* muted body */
+  --muted-c: #897ea8; /* faint mono labels */
+
+  --line: #ddd4f1; /* component hairlines */
+  --line-strong: #cabce8; /* stronger hairlines / ticks */
+  --grid: #c4b6e4; /* blueprint grid — kept visible on light, not washed out */
+
+  --accent: #7c3aed; /* violet-600 brand signal */
+  --accent-bright: #9d5cf6;
+  --accent-ink: #ffffff; /* text ON the violet surface */
+  --accent-soft: #6d28d9;
+
+  --glow-rgb: 124, 58, 237;
+  --shadow-2: rgba(60, 40, 110, 0.18);
+  --grain-opacity: 0.022;
+
+  color-scheme: light;
+}
+
+/* ── Dark palette — violet-tinted midnight ───────────────────────────────── */
+:root[data-theme="dark"] {
+  --paper: #0b0816;
+  --paper-raised: #15101f;
+  --panel: #1b1529;
+
+  --ink: #f0ecfb;
+  --slate: #c2b9d6;
+  --graphite: #9389ad;
+  --muted-c: #6a6086;
+
+  --line: #221b34;
+  --line-strong: #2c2440;
+  --grid: #1a1430;
+
+  --accent: #a78bfa; /* brighter violet reads on dark */
+  --accent-bright: #c4b5fd;
+  --accent-ink: #1a1030;
+  --accent-soft: #c4b5fd;
+
+  --glow-rgb: 167, 139, 250;
+  --shadow-2: rgba(0, 0, 0, 0.85);
+  --grain-opacity: 0.04;
+
+  color-scheme: dark;
+}
+
+/* Map runtime vars into Tailwind's theme (inline = resolved at the use site, so
+   utilities like bg-paper / text-mint flip with [data-theme]). Token NAMES are
+   unchanged from the original system on purpose. */
+@theme inline {
   --font-display: var(--font-bricolage), ui-sans-serif, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-space-mono), ui-monospace, "SFMono-Regular", monospace;
 
-  /* Canvas — deep cool ink, like a drafting table at night */
-  --color-paper: #080b0e;
-  --color-paper-raised: #0f1419;
-  --color-panel: #161d24;
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-panel: var(--panel);
 
-  /* Text — warm near-white down to faint telemetry */
-  --color-ink: #f3f6f2; /* headings, strongest text */
-  --color-slate: #c9d1cb; /* default body text */
-  --color-graphite: #99a39c; /* muted body text — AA on canvas */
-  --color-muted: #828d85; /* faint mono labels */
+  --color-ink: var(--ink);
+  --color-slate: var(--slate);
+  --color-graphite: var(--graphite);
+  --color-muted: var(--muted-c);
 
-  /* Drafting lines */
-  --color-line: #1b232a;
-  --color-line-strong: #2b353e;
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
 
-  /* The signal — electric mint */
-  --color-mint: #2fe3a6; /* accent text / icons — bright on dark */
-  --color-mint-bright: #38f0b2; /* the live dot, glow, emphasis */
-  --color-mint-ink: #04130d; /* text ON a mint surface */
-  --color-mint-soft: #8ff0cf; /* soft mint for sub-headings */
+  --color-mint: var(--accent);
+  --color-mint-bright: var(--accent-bright);
+  --color-mint-ink: var(--accent-ink);
+  --color-mint-soft: var(--accent-soft);
+}
 
-  --radius-brand: 4px; /* chips, buttons, small rects */
-  --radius-panel: 16px; /* glassy instrument panels, cards */
+/* Non-colour design tokens (utilities like shadow-panel / ease-survey rely on
+   these). Glows + panel shadow reference the per-theme runtime vars so they
+   adapt automatically. */
+@theme {
+  --radius-brand: 4px;
+  --radius-panel: 16px;
 
   --ease-survey: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* mint glows, layered for depth */
-  --glow-mint: 0 0 0 1px rgba(56, 240, 178, 0.25),
-    0 8px 40px -10px rgba(47, 227, 166, 0.45);
+  --glow-mint: 0 0 0 1px rgba(var(--glow-rgb), 0.28),
+    0 8px 40px -10px rgba(var(--glow-rgb), 0.5);
   --shadow-panel: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
-    0 24px 60px -28px rgba(0, 0, 0, 0.85);
+    0 24px 60px -28px var(--shadow-2);
 }
 
 @layer base {
-  :root {
-    color-scheme: dark;
-  }
-
   *,
   ::before,
   ::after {
@@ -98,13 +150,17 @@
     text-rendering: optimizeLegibility;
     /* Kerning + common ligatures for a more typeset feel (no perf cost). */
     font-feature-settings: "kern", "liga", "clig", "calt";
-    /* Engineering grid: a faint blueprint plotted on dark glass. Fades toward
-       the centre so type stays legible. */
+    /* Engineering blueprint grid. Uses a dedicated --grid token (stronger than
+       hairline borders) so it stays clearly visible on the light lavender
+       surface and stays subtle on dark. */
     background-image:
-      linear-gradient(var(--color-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
     background-size: 70px 70px;
     background-position: -1px -1px;
+    transition:
+      background-color 0.4s var(--ease-survey),
+      color 0.4s var(--ease-survey);
   }
 
   ::selection {
@@ -139,20 +195,21 @@
     inset: 0;
     z-index: -1;
     pointer-events: none;
+    /* Violet blooms, theme-aware via --glow-rgb. */
     background-image:
       radial-gradient(
         60% 50% at 82% 4%,
-        rgba(47, 227, 166, 0.16) 0%,
+        rgba(var(--glow-rgb), 0.16) 0%,
         transparent 60%
       ),
       radial-gradient(
         45% 40% at 6% 22%,
-        rgba(47, 227, 166, 0.07) 0%,
+        rgba(var(--glow-rgb), 0.08) 0%,
         transparent 55%
       ),
       radial-gradient(
         70% 60% at 50% 120%,
-        rgba(56, 240, 178, 0.08) 0%,
+        rgba(var(--glow-rgb), 0.09) 0%,
         transparent 60%
       );
   }
@@ -160,7 +217,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.04;
+    opacity: var(--grain-opacity);
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -271,12 +328,12 @@
     box-shadow: var(--glow-mint);
   }
   .text-glow {
-    text-shadow: 0 0 24px rgba(56, 240, 178, 0.55);
+    text-shadow: 0 0 24px rgba(var(--glow-rgb), 0.5);
   }
   .dot-glow {
     box-shadow:
-      0 0 0 4px rgba(56, 240, 178, 0.12),
-      0 0 14px 2px rgba(56, 240, 178, 0.7);
+      0 0 0 4px rgba(var(--glow-rgb), 0.14),
+      0 0 14px 2px rgba(var(--glow-rgb), 0.6);
   }
 
   /* Hairline rule used to separate survey sections */

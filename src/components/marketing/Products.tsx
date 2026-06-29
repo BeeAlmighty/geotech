@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionLabel from "@/components/ui/SectionLabel";
+import WorkCardImage from "@/components/marketing/WorkCardImage";
 import { products } from "@/lib/products";
 
 export default function Products() {
@@ -23,15 +24,19 @@ export default function Products() {
             </h2>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-graphite">
-            Two SaaS products we designed, built and operate ourselves — proof
+            Three SaaS products we designed, built and operate ourselves — proof
             we ship things that survive contact with real customers.
           </p>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7">
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {products.map((product, i) => (
             <Reveal key={product.slug} delay={i * 0.08} className="h-full">
-              <article className="group flex h-full flex-col rounded-panel border border-line bg-paper-raised p-7 shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_18px_40px_-30px_rgba(0,0,0,0.8)] transition-all duration-300 ease-survey hover:-translate-y-1.5 hover:border-line-strong hover:bg-panel hover:shadow-panel md:p-9">
+              <article className="group flex h-full flex-col overflow-hidden rounded-panel border border-line bg-paper-raised shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_18px_40px_-30px_rgba(0,0,0,0.8)] transition-all duration-300 ease-survey hover:-translate-y-1.5 hover:border-line-strong hover:bg-panel hover:shadow-panel">
+                {product.image && (
+                  <WorkCardImage src={product.image} alt={`${product.name} — product screenshot`} />
+                )}
+                <div className="flex flex-grow flex-col p-7 md:p-9">
                 <div className="flex items-center justify-between">
                   <span className="data-label flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-mint-bright" />
@@ -72,6 +77,7 @@ export default function Products() {
                       <ArrowUpRight size={13} />
                     </a>
                   )}
+                </div>
                 </div>
               </article>
             </Reveal>
