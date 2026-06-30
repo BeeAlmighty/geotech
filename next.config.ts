@@ -26,6 +26,32 @@ const nextConfig: NextConfig = {
       { source: "/blog/:path*", destination: `${BLOG_ORIGIN}/blog/:path*` },
     ];
   },
+
+  // CRITICAL: do NOT let THIS (apex) CDN cache the proxied blog responses.
+  // The blog project already does correct ISR caching, so a second cache layer
+  // here only ever caused stale 404s served before the blog had revalidated —
+  // the "404 on first load, 200 on refresh" bug. `Vercel-CDN-Cache-Control` (and
+  // the standard `CDN-Cache-Control`) are read only by the CDN and stripped
+  // before the browser, so the blog's own edge cache still provides the speed;
+  // the apex just proxies through fresh each time. One short hop, zero staleness.
+  async headers() {
+    return [
+      {
+        source: "/blog",
+        headers: [
+          { key: "Vercel-CDN-Cache-Control", value: "no-store" },
+          { key: "CDN-Cache-Control", value: "no-store" },
+        ],
+      },
+      {
+        source: "/blog/:path*",
+        headers: [
+          { key: "Vercel-CDN-Cache-Control", value: "no-store" },
+          { key: "CDN-Cache-Control", value: "no-store" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
