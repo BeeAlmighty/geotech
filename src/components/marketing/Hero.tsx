@@ -162,7 +162,7 @@ export default function Hero() {
           <div className="relative z-10 m-auto flex flex-col items-center justify-center text-mint">
             <div className="absolute h-28 w-28 rounded-full bg-mint-bright/15 blur-2xl" />
             <LogoMark size={132} animated />
-            <p className="data-label mt-7 text-graphite">GEOTECH · MARK 001</p>
+            <p className="data-label mt-7 text-graphite">GEOTECH DIGITAL HORIZON · MARK 001</p>
           </div>
 
           {/* telemetry baseline */}

@@ -126,7 +126,7 @@ export default function Logo({
             Geotech
           </span>
           <span className="data-label mt-0.5 !text-[0.5rem] !tracking-[0.18em] text-muted">
-            Digital Horizon
+            Digital Horizon Limited
           </span>
         </span>
       )}

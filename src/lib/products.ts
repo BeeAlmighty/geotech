@@ -35,7 +35,7 @@ export const products: Product[] = [
     category: "AI Agent SaaS",
     tagline: "The AI employee that lives in your WhatsApp.",
     summary:
-      "Every slow reply hands a customer to a faster competitor. Egora is an AI agent that answers every WhatsApp in seconds, qualifies the lead and books the job around the clock, all in your brand voice. Geotech builds it, trains it and runs it for you.",
+      "Every slow reply hands a customer to a faster competitor. Egora is an AI agent that answers every WhatsApp in seconds, qualifies the lead and books the job around the clock, all in your brand voice. Geotech Digital Horizon Limited builds it, trains it and runs it for you.",
     status: "Live",
     liveUrl: "https://egora.geotech.agency",
     liveLabel: "egora.geotech.agency",
